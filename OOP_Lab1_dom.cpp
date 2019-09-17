@@ -10,60 +10,68 @@
 
 using namespace std;
 
-struct rock {
+class rock {
+private:
 	int mas;
 	int speed;
+public:
+	
+	void init() {
+		cout << "Введенные данные" << endl;
+		mas = 5;
+		speed = 7;
+	}
+
+	/* Чтение с клавиатуры */
+	void read() {
+		cout << "Введите массу камня" << endl;
+		cin >> mas;
+		cout << "Введите его скорость" << endl;
+		cin >> speed;
+	}
+
+	/* Суммирование чисел */
+	rock operator + (rock &b)
+	{
+		rock c;
+		c.mas = b.mas + mas;
+		c.speed = b.speed + speed;
+		return c;
+	}
+
+	/* Вычисление модуля силы  тяжести */
+	int modul() {
+		int m;
+		m = mas * 10;
+		return m;
+	}
+
+	/* Вывод на экран */
+	void display() {
+		cout << "Масса: " << mas << endl;
+		cout << "Скорость: " << speed << endl;
+	}
+
+
 };
 
-void init(rock &a) {
-	cout << "Введенные данные" << endl;
-	a.mas = 5;
-	a.speed = 7;
-}
 
-/* Чтение с клавиатуры */
-void read(rock &a) {
-	cout << "Введите массу камня" << endl;
-	cin >> a.mas;
-	cout << "Введите его скорость" << endl;
-	cin >> a.speed;
-}
-
-/* Суммирование чисел */
-rock operator + (rock &b, rock &a)
-{
-	rock c;
-	c.mas = b.mas + a.mas;
-	c.speed = b.speed + a.speed;
-	return c;
-}
-
-
-/* Вычисление модуля силы  тяжести */
-int modul(rock a) {
-	int m;
-	m = a.mas * 10;
-	return m;
-}
-
-/* Вывод на экран */
-void display(rock a) {
-	cout << "Масса: " << a.mas << endl;
-	cout << "Скорость: " << a.speed << endl;
-}
 
 int main()
 {
 	setlocale(LC_ALL, "rus");
 	rock one, two;
 
-	init(one);
-	display(one);
-	read(two);
-	display(two);
+	one.init();
+	one.display();
+	two.read();
+	two.display();
 	rock three = one + two;
 	cout << "Сумма: " << endl;
-	display(three);
+	three.display();
+	int modul;
+	modul = one.modul();
+	cout << "Модуль силы первого камня " << modul << endl;
 
 	return 0;
 }
